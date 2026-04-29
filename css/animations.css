@@ -1,0 +1,206 @@
+/* ══════════════════════════════════════════════════════
+   SONALI KARVEER PORTFOLIO — animations.css
+   ══════════════════════════════════════════════════════ */
+
+/* ── REVEAL ON SCROLL ── */
+.reveal-up,
+.reveal-left,
+.reveal-right {
+  opacity: 0;
+  transition: opacity 0.65s cubic-bezier(.25,.46,.45,.94),
+              transform 0.65s cubic-bezier(.25,.46,.45,.94);
+}
+
+.reveal-up    { transform: translateY(40px); }
+.reveal-left  { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
+
+.reveal-up.visible,
+.reveal-left.visible,
+.reveal-right.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Staggered delays for cards */
+[data-delay="0"] { transition-delay: 0s; }
+[data-delay="1"] { transition-delay: 0.12s; }
+[data-delay="2"] { transition-delay: 0.24s; }
+
+/* ── HERO ENTRANCE ── */
+.hero-content > * {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: heroIn 0.8s cubic-bezier(.25,.46,.45,.94) forwards;
+}
+
+.hero-eyebrow      { animation-delay: 0.3s; }
+.hero-title        { animation-delay: 0.5s; }
+.hero-sub          { animation-delay: 0.7s; }
+.hero-btns         { animation-delay: 0.85s; }
+
+@keyframes heroIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero badges fade in */
+.hero-badge {
+  opacity: 0;
+  animation: badgeFade 0.7s ease forwards;
+}
+.hb-1 { animation-delay: 1s; }
+.hb-2 { animation-delay: 1.15s; }
+.hb-3 { animation-delay: 1.3s; }
+
+@keyframes badgeFade {
+  to { opacity: 1; }
+}
+
+/* ── STATS COUNTER ── */
+.stat-num {
+  transition: color 0.3s;
+}
+
+/* ── PCARD HOVER SHIMMER ── */
+.pcard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0) 40%,
+    rgba(255,255,255,0.06) 50%,
+    rgba(255,255,255,0) 60%
+  );
+  background-size: 200% 200%;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.pcard:hover::after {
+  opacity: 1;
+}
+
+/* ── NAVBAR SLIDE DOWN ── */
+#navbar {
+  animation: navDown 0.5s ease forwards;
+}
+
+@keyframes navDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* ── CERT CARD GLOW ── */
+.cert-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: radial-gradient(circle at 20% 20%, rgba(255,255,255,.03), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cert-card:hover::before { opacity: 1; }
+
+/* ── MARQUEE PAUSE ON HOVER ── */
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ── SCROLL HINT PULSE ── */
+.sh-line {
+  animation: shPulse 2s ease infinite;
+}
+
+@keyframes shPulse {
+  0%, 100% { opacity: .4; }
+  50%       { opacity: 1; }
+}
+
+/* ── SKILL PILL HOVER ── */
+.spill {
+  position: relative;
+  overflow: hidden;
+}
+.spill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; right: 100%; bottom: 0;
+  background: rgba(255,255,255,0.15);
+  transition: left 0.3s ease, right 0.3s ease;
+}
+.spill:hover::after {
+  left: 0; right: 0;
+}
+
+/* ── FOOTER SOCIAL BOUNCE ── */
+.footer-socials a {
+  display: inline-block;
+}
+
+/* ── EXPERIENCE ITEM HOVER ── */
+.exp-item {
+  transition: background 0.2s;
+  border-radius: 8px;
+  padding-left: 0;
+  padding-right: 0;
+}
+.exp-item:hover { background: rgba(255,51,102,.02); }
+
+/* ── CONTACT LINK SLIDE ── */
+.clink {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── PAGE LOADER ── */
+#page-loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-dark, #0D0D12);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+#page-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.loader-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -.5px;
+}
+.loader-logo span { color: #FF3366; }
+.loader-bar {
+  width: 120px;
+  height: 2px;
+  background: rgba(255,255,255,.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.loader-bar-inner {
+  height: 100%;
+  background: #FF3366;
+  border-radius: 2px;
+  animation: loaderFill 1.2s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes loaderFill {
+  from { width: 0; }
+  to   { width: 100%; }
+}
